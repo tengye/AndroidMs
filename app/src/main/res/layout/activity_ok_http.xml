@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".android.OkHttpActivity">
+    tools:context=".android.network.okhttp.OkHttpActivity">
 
     <Button
         android:id="@+id/getAsyncData"
