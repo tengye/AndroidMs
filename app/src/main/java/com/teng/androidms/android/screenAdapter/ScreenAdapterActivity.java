@@ -50,7 +50,7 @@ public class ScreenAdapterActivity extends FragmentActivity {
                 }
             });
         }
-
+        // 设计图的宽度是360dp， 以宽纬度来适配
         final float targetDensity = appDisplayMetrics.widthPixels / 360;
         final float targetScaleDensity = targetDensity * (sNoncompatScaledDensity / sNoncompatDensity);
         final int targetDensityDpi = (int) (160 * targetDensity);
