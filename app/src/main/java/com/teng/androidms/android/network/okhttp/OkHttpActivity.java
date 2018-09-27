@@ -6,8 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.teng.androidms.R;
 
@@ -15,7 +13,6 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.EventListener;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -48,7 +45,7 @@ public class OkHttpActivity extends Activity {
                 .url("http://v.juhe.cn/toutiao/index?type=top&key=5bca71befd51bfc2b56e32a9f687ff3f")
                 .build();
 
-        // 这里的回调是子线程...
+        // 异步请求
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -59,6 +56,14 @@ public class OkHttpActivity extends Activity {
                 Log.d(TAG, response.message());
             }
         });
+
+        // 同步请求
+        try {
+            client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void postData(){

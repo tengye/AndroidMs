@@ -1,4 +1,4 @@
-package com.teng.androidms.java.designPattern;
+package com.teng.androidms.android.java.designPattern;
 
 /**
  * 优点： 更好的复用性，更好的扩展性

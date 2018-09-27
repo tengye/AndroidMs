@@ -13,6 +13,7 @@ public class ReadMe {
     // 因为每一个OKHttpClient都维护了一个自己的连接池(ConnectionPool)和线程池(Dispatcher)，复用可以减少等待的时间，减少内存
     // 支持call 和 webSocket模式
     // 通过new Builder来自定义配置
+    // OKHttpClient发的创建 构建者模式 1、建造者独立，易扩展。 2、便于控制细节风险。
 
     // TODO RealCall 创建一个真正的请求，实现Call接口
     // 1、newCall -> newRealCall 创建一个Call,并且对Call创建监听
@@ -33,7 +34,9 @@ public class ReadMe {
 
     // TODO Interceptor
     // RetryAndFollowUpInterceptor 失败重试，重定向， 发起请求，并返回结果
-    //
+    // BridgeInterceptor 用户请求到网络请求的一个桥梁，添加头部信息，cookie等信息
+
+    // ConnectInterceptor  打开到目标服务器的连接并进入下一个拦截器。
 
     // TODO 线程池的注意点
     // 那么poolSize、corePoolSize、maximumPoolSize三者的关系是如何的呢？
@@ -43,6 +46,9 @@ public class ReadMe {
     //（3）如果阻塞队列的容量达到上限，且这时poolSize<maximumPoolSize，新增线程来处理任务。
     //（4）如果阻塞队列满了，且poolSize=maximumPoolSize，那么线程池已经达到极限，会根据饱和策略RejectedExecutionHandler拒绝新的任务。
 
-    // TODO 线程池队列的选择
-    // SynchronousQueue，LinkedBlockingQueue，ArrayBlockingQueue
+    // TODO 线程池队列的选择  阻塞队列 达到最大线程数的时候就往队列中缓存
+    // SynchronousQueue 同步队列，不缓存数据，有任务(runnable)时，就创建一个新的线程
+    // LinkedBlockingQueue
+    // ArrayBlockingQueue
+
 }

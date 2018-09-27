@@ -1,4 +1,4 @@
-package com.teng.androidms.java.designPattern;
+package com.teng.androidms.android.java.designPattern;
 
 /**
  * Created by teng on 17/7/29.
