@@ -82,6 +82,7 @@ public abstract class JsonRequest<T> extends Request<T> {
 
     @Override
     protected void deliverResponse(T response) {
+        // TODO 发送结果
         Response.Listener<T> listener;
         synchronized (mLock) {
             listener = mListener;

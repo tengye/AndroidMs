@@ -20,6 +20,7 @@ import android.os.Handler;
 import java.util.concurrent.Executor;
 
 /** Delivers responses and errors. */
+// TODO 传送返回消息和错误给主线程
 public class ExecutorDelivery implements ResponseDelivery {
     /** Used for posting responses, typically to the main thread. */
     private final Executor mResponsePoster;

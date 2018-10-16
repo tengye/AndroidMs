@@ -35,6 +35,7 @@ import java.util.Map;
  *
  * @param <T> The type of parsed response this request expects.
  */
+// TODO 生成一个请求 设置序列号，设置重试策略，添加header,生成参数等。。。。
 public abstract class Request<T> implements Comparable<Request<T>> {
 
     /** Default encoding for POST or PUT parameters. See {@link #getParamsEncoding()}. */

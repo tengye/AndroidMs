@@ -23,6 +23,7 @@ import java.io.IOException;
  * A variation of {@link ByteArrayOutputStream} that uses a pool of byte[] buffers instead
  * of always allocating them fresh, saving on heap churn.
  */
+// TODO 字节输出流，一个字节数组的池，避免byte[]总是创建和回收
 public class PoolingByteArrayOutputStream extends ByteArrayOutputStream {
     /**
      * If the {@link #PoolingByteArrayOutputStream(ByteArrayPool)} constructor is called, this is
@@ -50,6 +51,7 @@ public class PoolingByteArrayOutputStream extends ByteArrayOutputStream {
      */
     public PoolingByteArrayOutputStream(ByteArrayPool pool, int size) {
         mPool = pool;
+        // TODO 256以内的用一个数组
         buf = mPool.getBuf(Math.max(size, DEFAULT_SIZE));
     }
 

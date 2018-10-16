@@ -16,6 +16,7 @@
 
 package com.android.volley;
 
+// TODO 发送结果
 public interface ResponseDelivery {
     /** Parses a response from the network or cache and delivers it. */
     void postResponse(Request<?> request, Response<?> response);

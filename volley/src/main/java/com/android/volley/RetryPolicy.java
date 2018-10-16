@@ -37,6 +37,7 @@ package com.android.volley;
  *
  * <p>By default, Volley uses {@link DefaultRetryPolicy}.
  */
+// TODO 重试的规范
 public interface RetryPolicy {
 
     /** Returns the current timeout (used for logging). */

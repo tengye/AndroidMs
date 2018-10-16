@@ -25,6 +25,7 @@ import com.android.volley.Network;
 import com.android.volley.RequestQueue;
 import java.io.File;
 
+// TODO 外观模式中的外观类
 public class Volley {
 
     /** Default on-disk cache directory. */
@@ -56,7 +57,7 @@ public class Volley {
                 } catch (NameNotFoundException e) {
                 }
 
-                // AndroidHttpClient 已经在android6.0中移除，使用需要添加 org.apache.http.legacy 支持
+                // TODO AndroidHttpClient 已经在android6.0中移除，使用需要添加 org.apache.http.legacy 支持
                 network =
                         new BasicNetwork(
                                 new HttpClientStack(AndroidHttpClient.newInstance(userAgent)));

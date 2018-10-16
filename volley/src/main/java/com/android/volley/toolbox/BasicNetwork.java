@@ -47,6 +47,8 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 /** A network performing Volley requests over an {@link HttpStack}. */
+
+// TODO 通过HttpStack执行Volley请求的网络
 public class BasicNetwork implements Network {
     protected static final boolean DEBUG = VolleyLog.DEBUG;
 
@@ -109,6 +111,7 @@ public class BasicNetwork implements Network {
         mPool = pool;
     }
 
+    // TODO 调用协议栈发起请求并返回结果
     @Override
     public NetworkResponse performRequest(Request<?> request) throws VolleyError {
         long requestStart = SystemClock.elapsedRealtime();
@@ -148,6 +151,7 @@ public class BasicNetwork implements Network {
                 // Some responses such as 204s do not have content.  We must check.
                 InputStream inputStream = httpResponse.getContent();
                 if (inputStream != null) {
+                    // TODO 从server读取数据
                     responseContents =
                             inputStreamToBytes(inputStream, httpResponse.getContentLength());
                 } else {
@@ -285,6 +289,7 @@ public class BasicNetwork implements Network {
             if (in == null) {
                 throw new ServerError();
             }
+            // TODO 并没有new数组，而是从缓存中取
             buffer = mPool.getBuf(1024);
             int count;
             while ((count = in.read(buffer)) != -1) {

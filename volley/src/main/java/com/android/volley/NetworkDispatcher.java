@@ -87,6 +87,7 @@ public class NetworkDispatcher extends Thread {
         Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
         while (true) {
             try {
+                // TODO 死循环不断的读取请求
                 processRequest();
             } catch (InterruptedException e) {
                 // We may have been interrupted because it was time to quit.
@@ -105,6 +106,7 @@ public class NetworkDispatcher extends Thread {
     // This is needed to avoid keeping previous request references alive for an indeterminate amount
     // of time. Update consumer-proguard-rules.pro when modifying this. See also
     // https://github.com/google/volley/issues/114
+    // TODO 从请求队列中取出请求
     private void processRequest() throws InterruptedException {
         // Take a request from the queue.
         Request<?> request = mQueue.take();
@@ -128,6 +130,7 @@ public class NetworkDispatcher extends Thread {
             addTrafficStatsTag(request);
 
             // Perform the network request.
+            // TODO 通过netWork发起请求，也就是协议栈，然后返回一个结果
             NetworkResponse networkResponse = mNetwork.performRequest(request);
             request.addMarker("network-http-complete");
 
@@ -151,6 +154,7 @@ public class NetworkDispatcher extends Thread {
             }
 
             // Post the response back.
+            // TODO 将请求发送给用户
             request.markDelivered();
             mDelivery.postResponse(request, response);
             request.notifyListenerResponseReceived(response);

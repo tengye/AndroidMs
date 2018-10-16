@@ -50,9 +50,11 @@ public class RequestQueue {
      * The set of all requests currently being processed by this RequestQueue. A Request will be in
      * this set if it is waiting in any queue or currently being processed by any dispatcher.
      */
+    // TODO 包含所有的请求
     private final Set<Request<?>> mCurrentRequests = new HashSet<>();
 
     /** The cache triage queue. */
+    //TODO 带优先级的无界阻塞队列，每次出队都返回优先级最高的元素，是二叉树最小堆的实现
     private final PriorityBlockingQueue<Request<?>> mCacheQueue = new PriorityBlockingQueue<>();
 
     /** The queue of requests that are actually going out to the network. */
@@ -95,7 +97,7 @@ public class RequestQueue {
     }
 
     /**
-     * Creates the worker pool. Processing will not begin until {@link #start()} is called.
+     * Creates the worker pool. Processing will not begin until {@link #start()} issetset called.
      *
      * @param cache A Cache to use for persisting responses to disk
      * @param network A Network interface for performing HTTP requests
@@ -106,6 +108,7 @@ public class RequestQueue {
                 cache,
                 network,
                 threadPoolSize,
+                // TODO 发布响应和错误的响应传递接口
                 new ExecutorDelivery(new Handler(Looper.getMainLooper())));
     }
 
@@ -127,6 +130,7 @@ public class RequestQueue {
         mCacheDispatcher.start();
 
         // Create network dispatchers (and corresponding threads) up to the pool size.
+        // TODO 相当于自己维护了一个线程池,线程池的大小是固定的，并不能根据需要创建更多的线程，避免的创建线程和回收线程的性能损耗
         for (int i = 0; i < mDispatchers.length; i++) {
             NetworkDispatcher networkDispatcher =
                     new NetworkDispatcher(mNetworkQueue, mNetwork, mCache, mDelivery);
@@ -148,11 +152,13 @@ public class RequestQueue {
     }
 
     /** Gets a sequence number. */
+    // TODO 生成一个序列号，用于先进先出的排序
     public int getSequenceNumber() {
         return mSequenceGenerator.incrementAndGet();
     }
 
     /** Gets the {@link Cache} instance being used. */
+    // TODO 找到缓存，这里应该指的是构造方法中的 DiskBasedCache
     public Cache getCache() {
         return mCache;
     }
@@ -161,6 +167,7 @@ public class RequestQueue {
      * A simple predicate or filter interface for Requests, for use by {@link
      * RequestQueue#cancelAll(RequestFilter)}.
      */
+    // TODO 找到对应的请求
     public interface RequestFilter {
         boolean apply(Request<?> request);
     }
@@ -205,13 +212,16 @@ public class RequestQueue {
      */
     public <T> Request<T> add(Request<T> request) {
         // Tag the request as belonging to this queue and add it to the set of current requests.
+        // TODO 给请求设置队列，当请求结束的时候通知队列, 在request 的finish()方法中
         request.setRequestQueue(this);
         synchronized (mCurrentRequests) {
             mCurrentRequests.add(request);
         }
 
         // Process requests in the order they are added.
+        // TODO 为这个请求添加序列号，用于执行先入先出的操作
         request.setSequence(getSequenceNumber());
+        // TODO 将事件添加到此请求的事件日志中，用于调试。
         request.addMarker("add-to-queue");
 
         // If the request is uncacheable, skip the cache queue and go straight to the network.

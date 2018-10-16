@@ -72,6 +72,7 @@ public class StringRequest extends Request<String> {
         }
     }
 
+    // TODO 移交Response,实现成功的回调
     @Override
     protected void deliverResponse(String response) {
         Response.Listener<String> listener;
@@ -83,6 +84,7 @@ public class StringRequest extends Request<String> {
         }
     }
 
+    // TODO 处理响应的数据
     @Override
     @SuppressWarnings("DefaultCharset")
     protected Response<String> parseNetworkResponse(NetworkResponse response) {

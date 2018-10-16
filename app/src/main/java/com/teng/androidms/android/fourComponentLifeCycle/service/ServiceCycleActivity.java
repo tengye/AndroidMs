@@ -5,11 +5,15 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import com.teng.androidms.IMyAidlInterface;
 import com.teng.androidms.R;
+import com.teng.androidms.android.aidl.MyService;
 
 public class ServiceCycleActivity extends AppCompatActivity {
 
@@ -22,18 +26,24 @@ public class ServiceCycleActivity extends AppCompatActivity {
 
     // bindService 跟调用者的生命周期相关，调用者结束的话会unBinderService
 
+    private IMyAidlInterface iMyAidlInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_cycle);
 
-        final Intent serviceIntent = new Intent(ServiceCycleActivity.this, ServiceA.class);
+        final Intent serviceIntent = new Intent(ServiceCycleActivity.this, MyService.class);
 
         final ServiceConnection serviceConnection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-
+                iMyAidlInterface = IMyAidlInterface.Stub.asInterface(service);
+                try {
+                    Toast.makeText(getApplicationContext(), iMyAidlInterface.getName(), Toast.LENGTH_LONG).show();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

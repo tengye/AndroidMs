@@ -90,6 +90,7 @@ public class CacheDispatcher extends Thread {
         Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
 
         // Make a blocking call to initialize the cache.
+        // TODO 初始化DiskBasedCache缓存
         mCache.initialize();
 
         while (true) {
@@ -124,6 +125,7 @@ public class CacheDispatcher extends Thread {
         request.addMarker("cache-queue-take");
 
         // If the request has been canceled, don't bother dispatching it.
+        // TODO 如果请求已经取消
         if (request.isCanceled()) {
             request.finish("cache-discard-canceled");
             return;
@@ -131,9 +133,11 @@ public class CacheDispatcher extends Thread {
 
         // Attempt to retrieve this item from cache.
         Cache.Entry entry = mCache.get(request.getCacheKey());
+        // TODO 如果cache中没有数据
         if (entry == null) {
             request.addMarker("cache-miss");
             // Cache miss; send off to the network dispatcher.
+            // TODO 如果缓存丢失，看一下是否有相同的正在进行的请求
             if (!mWaitingRequestManager.maybeAddToWaitingRequests(request)) {
                 mNetworkQueue.put(request);
             }
@@ -141,6 +145,7 @@ public class CacheDispatcher extends Thread {
         }
 
         // If it is completely expired, just send it to the network.
+        // TODO 如果cache已过时
         if (entry.isExpired()) {
             request.addMarker("cache-hit-expired");
             request.setCacheEntry(entry);
@@ -151,6 +156,7 @@ public class CacheDispatcher extends Thread {
         }
 
         // We have a cache hit; parse its data for delivery back to the request.
+        // TODO 缓存命中
         request.addMarker("cache-hit");
         Response<?> response =
                 request.parseNetworkResponse(
@@ -158,6 +164,7 @@ public class CacheDispatcher extends Thread {
         request.addMarker("cache-hit-parsed");
 
         if (!entry.refreshNeeded()) {
+            // TODO 数据是否新鲜
             // Completely unexpired cache hit. Just deliver the response.
             mDelivery.postResponse(request, response);
         } else {
@@ -172,6 +179,7 @@ public class CacheDispatcher extends Thread {
             if (!mWaitingRequestManager.maybeAddToWaitingRequests(request)) {
                 // Post the intermediate response back to the user and have
                 // the delivery then forward the request along to the network.
+                // TODO 先将结果返回，然后再次发起请求
                 mDelivery.postResponse(
                         request,
                         response,

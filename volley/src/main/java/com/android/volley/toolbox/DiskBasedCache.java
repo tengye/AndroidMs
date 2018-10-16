@@ -47,6 +47,8 @@ import java.util.Map;
  *
  * <p>This cache supports the {@link Entry#allResponseHeaders} headers field.
  */
+// TODO 缓存实现，将文件直接缓存到指定目录中的硬盘上。默认磁盘使用大小为5MB，但可配置。
+// TODO 请求文件缓存
 public class DiskBasedCache implements Cache {
 
     /** Map of the Key, CacheHeader pairs */
@@ -266,6 +268,7 @@ public class DiskBasedCache implements Cache {
     }
 
     /** Prunes the cache to fit the maximum size. */
+    // TODO 缓存超过限制，清理缓存，LRU
     private void pruneIfNeeded() {
         if (mTotalSize < mMaxCacheSizeInBytes) {
             return;

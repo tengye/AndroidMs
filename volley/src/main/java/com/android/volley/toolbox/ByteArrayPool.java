@@ -51,8 +51,13 @@ import java.util.List;
  */
 public class ByteArrayPool {
     /** The buffer pool, arranged both by last use and by buffer size */
+    /* TODO byte[]待删集合，记录了byte[]的使用顺序。当缓存的byte数目超过指定的最大值时，会回收该list集合中的第一个元素。
+       TODO 每一次从变量mBuffersBySize中获取到合适的byte[]时，会将返回值从该集合中删除，因为这个byte[]是最近使用的。
+       TODO 每一次回收该集合中第0个元素，保证了回收的byte[]是使用时间最久远的。
+     */
     private final List<byte[]> mBuffersByLastUse = new ArrayList<>();
 
+    // TODO byte[]的真正缓存list集合。每一次获取时都是从该集合中获取或者新生成
     private final List<byte[]> mBuffersBySize = new ArrayList<>(64);
 
     /** The total size of the buffers in the pool */
@@ -65,6 +70,7 @@ public class ByteArrayPool {
     private final int mSizeLimit;
 
     /** Compares buffers by size */
+    // TODO 根据字节长度排序
     protected static final Comparator<byte[]> BUF_COMPARATOR =
             new Comparator<byte[]>() {
                 @Override
@@ -72,11 +78,6 @@ public class ByteArrayPool {
                     return lhs.length - rhs.length;
                 }
             };
-
-    /** @param sizeLimit the maximum size of the pool, in bytes */
-    public ByteArrayPool(int sizeLimit) {
-        mSizeLimit = sizeLimit;
-    }
 
     /**
      * Returns a buffer from the pool if one is available in the requested size, or allocates a new
@@ -86,10 +87,12 @@ public class ByteArrayPool {
      *     larger.
      * @return a byte[] buffer is always returned.
      */
+    // TODO 从池中找到想要的byte[]
     public synchronized byte[] getBuf(int len) {
         for (int i = 0; i < mBuffersBySize.size(); i++) {
             byte[] buf = mBuffersBySize.get(i);
             if (buf.length >= len) {
+                // TODO mCurrentSize表示池的大小
                 mCurrentSize -= buf.length;
                 mBuffersBySize.remove(i);
                 mBuffersByLastUse.remove(buf);
@@ -99,13 +102,20 @@ public class ByteArrayPool {
         return new byte[len];
     }
 
+    /** @param sizeLimit the maximum size of the pool, in bytes */
+    public ByteArrayPool(int sizeLimit) {
+        mSizeLimit = sizeLimit;
+    }
+
     /**
      * Returns a buffer to the pool, throwing away old buffers if the pool would exceed its allotted
      * size.
      *
      * @param buf the buffer to return to the pool.
      */
+    // TODO 将用完的空间放回到byte池
     public synchronized void returnBuf(byte[] buf) {
+        // TODO 每一个字节数组默认的最大长度是4096
         if (buf == null || buf.length > mSizeLimit) {
             return;
         }
@@ -120,6 +130,7 @@ public class ByteArrayPool {
     }
 
     /** Removes buffers from the pool until it is under its size limit. */
+    // TODO 将超出限制的字节数组回收
     private synchronized void trim() {
         while (mCurrentSize > mSizeLimit) {
             byte[] buf = mBuffersByLastUse.remove(0);

@@ -34,6 +34,7 @@ import java.util.Map;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
 
+// TODO 请求连接，发起请求
 /** A {@link BaseHttpStack} based on {@link HttpURLConnection}. */
 public class HurlStack extends BaseHttpStack {
 

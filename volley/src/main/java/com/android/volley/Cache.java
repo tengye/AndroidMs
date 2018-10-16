@@ -104,6 +104,9 @@ public interface Cache {
         }
 
         /** True if a refresh is needed from the original data source. */
+        // TODO Cache－Control 和 Expires 首部，计算出缓存的过期时间(ttl)，和缓存的新鲜度时间(softTtl,默认softTtl和ttl相同)，
+        // TODO 如果有Cache-Control标签以它为准，没有就以Expires标签里的内容为准。
+        // TODO softTtl 在 HttpHeaderParser 的parseCacheHeaders中定义
         public boolean refreshNeeded() {
             return this.softTtl < System.currentTimeMillis();
         }

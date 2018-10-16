@@ -80,6 +80,7 @@ public class ImageRequest extends Request<Bitmap> {
             Config decodeConfig,
             @Nullable Response.ErrorListener errorListener) {
         super(Method.GET, url, errorListener);
+        // TODO 设置失败重试的参数
         setRetryPolicy(
                 new DefaultRetryPolicy(
                         DEFAULT_IMAGE_TIMEOUT_MS,
@@ -130,6 +131,7 @@ public class ImageRequest extends Request<Bitmap> {
      * @param actualSecondary Actual size of the secondary dimension
      * @param scaleType The ScaleType used to calculate the needed image size.
      */
+    // TODO 获得希望得到的宽高尺寸
     private static int getResizedDimension(
             int maxPrimary,
             int maxSecondary,
@@ -191,6 +193,7 @@ public class ImageRequest extends Request<Bitmap> {
     }
 
     /** The real guts of parseNetworkResponse. Broken out for readability. */
+    // TODO 将字节数组转换为
     private Response<Bitmap> doParse(NetworkResponse response) {
         byte[] data = response.data;
         BitmapFactory.Options decodeOptions = new BitmapFactory.Options();
