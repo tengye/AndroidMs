@@ -51,6 +51,22 @@ public class FragmentContainer extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().remove(fragmentA).commitAllowingStateLoss();
             }
         });
+
+        findViewById(R.id.hide).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().hide(fragmentA).commit();
+            }
+        });
+
+        findViewById(R.id.show).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().show(fragmentA).commit();
+            }
+        });
+
+
     }
 
     @Override
