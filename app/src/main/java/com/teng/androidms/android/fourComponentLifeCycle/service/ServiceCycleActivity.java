@@ -1,14 +1,22 @@
 package com.teng.androidms.android.fourComponentLifeCycle.service;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.teng.androidms.IMyAidlInterface;
@@ -27,6 +35,9 @@ public class ServiceCycleActivity extends AppCompatActivity {
     // bindService 跟调用者的生命周期相关，调用者结束的话会unBinderService
 
     private IMyAidlInterface iMyAidlInterface;
+
+    private Messenger serverMessenger;
+    private Messenger mClientMessenger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,5 +90,68 @@ public class ServiceCycleActivity extends AppCompatActivity {
                 unbindService(serviceConnection);
             }
         });
+
+
+
+        /************************** Messenger *********************/
+        mClientMessenger = new Messenger(new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                // TODO 接收客户端发来的消息
+
+            }
+        });
+
+        ServiceConnection mMessengerConnection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                serverMessenger = new Messenger(service);
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+                serverMessenger = null;
+            }
+        };
+
+        // TODO RemoteViews
+        sendNotification();
+    }
+
+    private void sendMessageToServer() {
+        // TODO 发送一个消息给 Server
+        String msgContent = "我是客户端消息";
+
+        Message message = Message.obtain();
+        message.obj = msgContent;
+        message.replyTo = mClientMessenger;
+
+        try {
+            serverMessenger.send(message);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void sendNotification() {
+        // TODO 另一个进程显示当前进程的UI
+        RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.layout_remote);
+        contentView.setTextViewText(R.id.remote_title, "Remote View Title");
+        contentView.setTextViewText(R.id.remote_content, "This Remote View Content ... \nThis Remote View Content ... \nThis Remote View Content ...");
+        Intent intent = new Intent(this, ServiceCycleActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        // RemoteViews的事件只能是PendingIntent
+        contentView.setOnClickPendingIntent(R.id.remote_content, pendingIntent);
+        Notification notification = new Notification.Builder(this)
+                .setWhen(System.currentTimeMillis())    // 设置显示通知的时间
+                .setAutoCancel(true)                    // 设置是否可以手动取消
+                .setSmallIcon(R.mipmap.ic_launcher)     // 设置在状态栏的小图标，如果没有设置，不显示通知
+                .setCustomBigContentView(contentView)   // 设置自定义View，setCustomBigContentView可以显示remoteviews的完整高度，setCustomContentView只能显示系统通知栏高度。
+                .build();
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        // 发通知
+        notificationManager.notify(1, notification);
     }
 }

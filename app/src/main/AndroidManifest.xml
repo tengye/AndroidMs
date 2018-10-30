@@ -27,7 +27,7 @@
         <activity android:name=".android.network.volley.VolleyActivity" />
         <!-- <activity android:name=".android.evenDispatch.SceneActivity1"/> -->
 
-        <activity android:name=".android.fourComponentLifeCycle.fragment.FragmentContainer">
+        <activity android:name=".android.fourComponentLifeCycle.service.ServiceCycleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
