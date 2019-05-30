@@ -34,7 +34,8 @@
             </intent-filter>
         </activity>
         
-        <service android:name=".android.fourComponentLifeCycle.service.ServiceA"/>
+        <service android:name=".android.fourComponentLifeCycle.service.ServiceA"
+            android:process="hhhh"/>
         <service android:name=".android.aidl.MyService"/>
     </application>
 

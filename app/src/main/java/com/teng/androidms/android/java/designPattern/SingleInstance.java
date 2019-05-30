@@ -37,6 +37,7 @@ public class SingleInstance {
     // A: 在java 1.5 的时候加了volatile，这个变量相当于加了synchronized ，
     // 这个变量保证了变量是从主存中读写的，而不是工作内存，而且读必须在写发生之后，
     // 所以对象的状态是所有对象都可见的
+    //
 /**
     public static SingleInstance getInstance(){
         if (singleInstance == null){

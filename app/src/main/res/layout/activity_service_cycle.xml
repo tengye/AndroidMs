@@ -11,29 +11,74 @@
         android:id="@+id/start_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="start service"/>
+        android:text="start service"
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/stop_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="stop service"/>
+        android:text="stop service"
+        android:textAllCaps="false" />
 
 
     <Button
         android:id="@+id/bind_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="bind service"/>
+        android:text="bind service"
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/unbind_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="unbind service"/>
+        android:text="unbind service"
+        android:textAllCaps="false" />
+
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="20dp"
+            android:background="@color/colorAccent"
+            android:text="abc" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:textIsSelectable="true"
+        android:text="我的家bjbcaljhdlas jhdlkjha skljhdlkajs hdljasbdjna sbjhasgdjlgabsld asjn dj王腾"
+        android:ellipsize="marquee"/>
+
+    <com.teng.androidms.android.view.MarqueeTextView
+        android:id="@+id/guide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:gravity="center_vertical"
+        android:textIsSelectable="true"
+        android:text="我的家bjbcaljhdlas jhdlkjha skljhdlkajs hdljasbdjna sbjhasgdjlgabsld asjn dj"
+        android:singleLine="true" />
+
+    <com.teng.androidms.android.view.MarqueeTextView
+        android:id="@+id/guide1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:gravity="center_vertical"
+        android:textIsSelectable="true"
+        android:text="我的家bjbcaljhdlas jhdlkjha skljhdlkajs hdljasbdjna sbjhasgdjlgabsld asjn dj"
+        android:singleLine="true" />
 
 </LinearLayout>

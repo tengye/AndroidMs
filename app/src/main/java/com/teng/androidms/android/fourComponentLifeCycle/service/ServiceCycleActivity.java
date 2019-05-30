@@ -1,5 +1,6 @@
 package com.teng.androidms.android.fourComponentLifeCycle.service;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -8,22 +9,26 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.TouchDelegate;
 import android.view.View;
+import android.view.ViewParent;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.teng.androidms.IMyAidlInterface;
 import com.teng.androidms.R;
 import com.teng.androidms.android.aidl.MyService;
+//import com.teng.androidms.android.view.MarqueeTextView;
 
-public class ServiceCycleActivity extends AppCompatActivity {
+public class ServiceCycleActivity extends Activity {
 
     // 先startService(onCreate 然后 onStartCommand) -- > bindService(onBind) --- > stopService (不执行ondDestroy) -- > unbindService (onUnbind 然后 onDestroy)
     // 先startService(onCreate 然后 onStartCommand) -- > bindService(onBind)  -- > unbindService (onUnbind) --- > stopService (ondDestroy)
@@ -91,6 +96,19 @@ public class ServiceCycleActivity extends AppCompatActivity {
             }
         });
 
+//        MarqueeTextView marquee = (MarqueeTextView) findViewById(R.id.guide);
+//        MarqueeTextView marquee1 = (MarqueeTextView) findViewById(R.id.guide1);
+//
+//        int screenWidth = getResources().getDisplayMetrics().widthPixels;
+//        marquee.setText("我的家bjbcaljhdlas jhdlkjha skljhdlkajs hdljasbdjna sbjhasgdjlgabsld asjn dj王腾");
+//        marquee.setSpeed(500f);
+//        marquee.init(screenWidth);
+//        marquee.startScroll();
+//
+//        marquee1.setText("我的家bjbcaljhdlas jhdlkjha skljhdlkajs hdljasbdjna sbjhasgdjlgabsld asjn dj王腾");
+//        marquee1.setSpeed(1f);
+//        marquee1.init(screenWidth);
+//        marquee1.startScroll();
 
 
         /************************** Messenger *********************/

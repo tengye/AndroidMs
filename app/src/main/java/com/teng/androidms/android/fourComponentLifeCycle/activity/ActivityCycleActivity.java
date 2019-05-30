@@ -36,8 +36,6 @@ public class ActivityCycleActivity extends FragmentActivity {
          *
           */
 
-
-
         startActivity(new Intent());
 
 

@@ -12,6 +12,9 @@ import android.util.Log;
 
 import com.teng.androidms.R;
 
+/**
+ * 头条 屏幕适配新方案
+ */
 public class ScreenAdapterActivity extends FragmentActivity {
 
     public static final String TAG = "ScreenAdapterActivity";
