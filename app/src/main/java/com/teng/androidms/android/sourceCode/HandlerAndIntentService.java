@@ -7,6 +7,7 @@ package com.teng.androidms.android.sourceCode;
 public class HandlerAndIntentService {
 
     // TODO Handler
+    /** https://www.jianshu.com/p/7e43edbe1678 **/
     // 1、MessageQueue 消息队列,在创建Looper的时候同时被创建，在next()方法中循环读取消息
     // 单链表维护，在插入和删除上有优势
 

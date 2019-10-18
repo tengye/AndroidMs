@@ -2,6 +2,12 @@ package com.teng.androidms.android.java;
 
 public class SortTest {
 
+    public static void main(String[] args) {
+        int[] aary = {2,1,5,8,3};
+
+        insert(aary);
+    }
+
     // 冒泡
     private void bubble(int[] array) {
         for (int i = 0; i < array.length - 1; i++) {
@@ -16,14 +22,19 @@ public class SortTest {
     }
 
     // 插入
-    private void insert(int[] array) {
+    private static void insert(int[] array) {
         for (int i = 1; i < array.length; i++) {
             int j;
             int temp = array[i];
-            for (j = i; j > 0 && array[j] > temp; j--) {
-                array[j] = array[j + 1];
+            for (j = i-1; j >= 0 && array[j] > temp; j--) {
+                array[j+1] = array[j];
             }
-            array[j] = temp;
+            array[j+1] = temp;
+        }
+
+        System.out.print("\n");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
         }
     }
 
