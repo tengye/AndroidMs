@@ -21,6 +21,10 @@ public class AdapterMode {
     // 3、其他的类来继承这个抽象类，根据需要实现自己想要实现的方法
 
 
+    public static void main(String[] args) {
+        StringBuilder builder = new StringBuilder();
+//        builder.append()
 
+    }
 
 }

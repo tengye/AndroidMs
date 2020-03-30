@@ -30,6 +30,11 @@ public class HandlerAndIntentService {
     // 保证每个线程只创建一个looper，looper初始化后就会调用looper.loop创建一个MessageQueue，
     // 这个方法在UI线程初始化的时候就会完成，我们不需要手动创建
 
+    //PostDelay的实现方式
+
+
+
+
     /////////////////////////////////////////////////////////////////////
     // TODO IntentService
 

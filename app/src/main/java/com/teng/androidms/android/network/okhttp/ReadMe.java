@@ -1,5 +1,7 @@
 package com.teng.androidms.android.network.okhttp;
 
+import okhttp3.ConnectionPool;
+
 public class ReadMe {
 
     // TODO 关键的类
@@ -50,5 +52,20 @@ public class ReadMe {
     // SynchronousQueue 同步队列，不缓存数据，有任务(runnable)时，就创建一个新的线程
     // LinkedBlockingQueue
     // ArrayBlockingQueue
+
+
+//    1.优点   责任链模式重要的两点：分离职责，动态组合
+//
+//    耦合度降低，请求和处理是分开的
+//    2.缺点
+//
+//    责任链太长或者每条链判断处理的时间太长会影响性能。特别是递归循环的时候
+//
+//    不一定被处理，每个职责类的职责很明确，这就需要对写默认的处理了
+//
+
+
+    ConnectionPool connectionPool = new ConnectionPool();
+
 
 }

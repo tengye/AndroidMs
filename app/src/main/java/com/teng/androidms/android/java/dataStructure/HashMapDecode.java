@@ -10,7 +10,7 @@ public class HashMapDecode {
     /**
      * 默认的初始化长度 为减小hashcode碰撞 和空间的浪费造成的更大的碰撞率 必须为2的n次
      * 这个长度不同的SDK版本不同，SDK25是4  、 SDK27 28是16
-     * @see {为什么hashMap的长度为2的n次.png}
+     * @see {why_hashMap_length_is_n_2_is_n_2.png}
      */
     static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; // aka 16
 
@@ -50,6 +50,7 @@ public class HashMapDecode {
      * get方法
      */
     private Object get(int hashCode, String key) {
+        HashMap<String, String> stringStringHashMap = new HashMap<>();
         // 首先从table中获取获取第一个元素，判断是否是否相等，相等，直接返回第一个value
 
         // 不相等的话，如果还有下个节点 判断头结点，1、是链表，遍历寻找 2、是树， 从根节点开始找
@@ -58,6 +59,8 @@ public class HashMapDecode {
 
     /**
      * put方法
+     *
+     * int hash = (key == null) ? 0 : sun.misc.Hashing.singleWordWangJenkinsHash(key);
      */
     private void put(Object key, Object value) {
         // 1、table为空或者长度为0   resize()

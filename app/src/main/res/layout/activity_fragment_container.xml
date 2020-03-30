@@ -12,7 +12,27 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/move_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="移动"/>
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/colorPrimary">
+
+        <View
+            android:id="@+id/move_view"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@color/colorAccent"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,10 +42,16 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/add"
+            android:id="@+id/addA"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="add"/>
+            android:text="addA"/>
+
+        <Button
+            android:id="@+id/addB"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="addB"/>
 
         <Button
             android:id="@+id/replace"
@@ -34,10 +60,16 @@
             android:text="replace"/>
 
         <Button
-            android:id="@+id/remove"
+            android:id="@+id/removeA"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="remove"/>
+            android:text="removeA"/>
+
+        <Button
+            android:id="@+id/removeB"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="removeB"/>
 
     </LinearLayout>
 

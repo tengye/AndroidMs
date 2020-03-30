@@ -27,16 +27,16 @@
         <activity android:name=".android.network.volley.VolleyActivity" />
         <!-- <activity android:name=".android.evenDispatch.SceneActivity1"/> -->
 
-        <activity android:name=".android.fourComponentLifeCycle.service.ServiceCycleActivity">
+        <activity android:name=".android.fourComponentLifeCycle.fragment.FragmentContainer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         
-        <service android:name=".android.fourComponentLifeCycle.service.ServiceA"
-            android:process="hhhh"/>
-        <service android:name=".android.aidl.MyService"/>
+        <!--<service android:name=".android.fourComponentLifeCycle.service.ServiceA"-->
+            <!--android:process="hhhh"/>-->
+        <!--<service android:name=".android.aidl.MyService"/>-->
     </application>
 
 </manifest>

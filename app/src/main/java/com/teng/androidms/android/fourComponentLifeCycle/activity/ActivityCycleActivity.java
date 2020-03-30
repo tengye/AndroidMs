@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 import android.view.WindowManager;
 
+import com.bumptech.glide.Glide;
 import com.teng.androidms.R;
 
 public class ActivityCycleActivity extends FragmentActivity {
@@ -37,6 +39,9 @@ public class ActivityCycleActivity extends FragmentActivity {
           */
 
         startActivity(new Intent());
+
+
+//        Glide.with(this).load("www.baidu.com").into(new View(this));
 
 
     }

@@ -3,9 +3,11 @@ package com.teng.androidms.android.java;
 public class SortTest {
 
     public static void main(String[] args) {
-        int[] aary = {2,1,5,8,3};
+        int[] aary = {2, 1, 5, 8, 3};
 
         insert(aary);
+
+//        quickSort(aary, 0, aary.length-1);
     }
 
     // 冒泡
@@ -26,10 +28,10 @@ public class SortTest {
         for (int i = 1; i < array.length; i++) {
             int j;
             int temp = array[i];
-            for (j = i-1; j >= 0 && array[j] > temp; j--) {
-                array[j+1] = array[j];
+            for (j = i; j > 0 && array[j - 1] > temp; j--) {
+                array[j] = array[j - 1];
             }
-            array[j+1] = temp;
+            array[j] = temp;
         }
 
         System.out.print("\n");
@@ -39,7 +41,7 @@ public class SortTest {
     }
 
     // 快排
-    private int pos(int[] array, int low, int high) {
+    private static int pos(int[] array, int low, int high) {
         int key = array[low];
         while (low < high) {
             while (array[high] > key && low < high) {
@@ -58,13 +60,18 @@ public class SortTest {
         return high;
     }
 
-    private void quickSort(int[] array, int low, int high) {
-        if (low <= high) {
+    private static void quickSort(int[] array, int low, int high) {
+        if (low >= high) {
             return;
         }
         int pos = pos(array, low, high);
         quickSort(array, low, pos - 1);
         quickSort(array, pos + 1, high);
+
+        System.out.print("\n");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+        }
     }
 
     // 归并
@@ -99,21 +106,21 @@ public class SortTest {
         }
 
         for (int g = 0; g < temp.length; g++) {
-            array[low+g] = temp[g];
+            array[low + g] = temp[g];
         }
     }
 
     // 二分法查找
-    private int erfenFind(int[] array, int key){
+    private int erfenFind(int[] array, int key) {
         int start = 0;
-        int end = array.length-1;
+        int end = array.length - 1;
         while (start <= end) {
-            int mid = (start+end)/2;
-            if (array[mid] < key){
+            int mid = (start + end) / 2;
+            if (array[mid] < key) {
                 start = mid;
-            }else if (array[mid] > key){
+            } else if (array[mid] > key) {
                 end = mid;
-            }else {
+            } else {
                 return mid;
             }
         }

@@ -4,8 +4,16 @@ public class TwoTreeTest extends SortTest {
 
     // 二叉树的深度
     // 二叉树K层节点
-    // 二叉树三种遍历方法
+    // 二叉树三种遍历方法  前序 中序 后序看的是根节点的输出位置
 
+
+    private void looperTree(Node node) {
+        if (node != null) {
+            looperTree(node.left);
+            System.out.println(node.value);
+            looperTree(node.right);
+        }
+    }
 
     private int deepNode(Node node) {
         int deep = 0;
